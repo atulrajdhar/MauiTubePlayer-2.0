@@ -58,6 +58,9 @@ namespace TubePlayer
             // Regsiter API service
             services.AddSingleton<IApiService, YoutubeService>();
 
+            // Register FileDownloadService
+            services.AddSingleton<IDownloadFileService, FileDownloadService>();
+
             // Register ViewModels
             services.AddSingleton<StartPageViewModel>();
             services.AddTransient<VideoDetailsPageViewModel>();

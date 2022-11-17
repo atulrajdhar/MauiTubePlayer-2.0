@@ -21,10 +21,19 @@ public partial class VideoDetailsPageViewModel : AppViewModelBase
     [ObservableProperty]
     private string videoSource;
 
+    [ObservableProperty]
+    private double progressValue;
+
+    [ObservableProperty]
+    private bool isDownloading = false;
+
     private IEnumerable<MuxedStreamInfo> streamInfo;
 
-    public VideoDetailsPageViewModel(IApiService appApiService) : base(appApiService)
+    private IDownloadFileService _fileDownloadService;
+
+    public VideoDetailsPageViewModel(IApiService appApiService, IDownloadFileService fileDownloadService) : base(appApiService)
     {
+        this._fileDownloadService = fileDownloadService;
         this.Title = "TUBE PLAYER";
     }
 
@@ -112,6 +121,40 @@ public partial class VideoDetailsPageViewModel : AppViewModelBase
     [RelayCommand]
     private async Task DownloadVideo()
     {
+        if (IsDownloading)
+            return;
+
+        var progressIndicator = new Progress<double>((value) => ProgressValue = value);
+        var cts = new CancellationTokenSource();
+
+        try
+        {
+            IsDownloading = true;
+
+            var urlToDownload = streamInfo.OrderByDescending(video => video.VideoResolution.Area).First().Url;
+
+            // Download the file
+            var downloadedFilePath = await _fileDownloadService.DownloadFileAsync(
+                urlToDownload,
+                TheVideo.Snippet.Title.CleanCacheKey() + ".mp4",
+                progressIndicator,
+                cts.Token);
+
+            // Save the file
+            await Share.RequestAsync(new ShareFileRequest
+            {
+                File = new ShareFile(downloadedFilePath),
+                Title = TheVideo.Snippet.Title
+            });
+        }
+        catch(OperationCanceledException ex)
+        {
+            // Handle exception and cancellation token here
+        }
+        finally
+        {
+            IsDownloading = false;
+        }
     }
 
     [RelayCommand]
