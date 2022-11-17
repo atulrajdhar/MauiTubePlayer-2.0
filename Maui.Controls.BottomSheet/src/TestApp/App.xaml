@@ -1,0 +1,27 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TestApp"
+             x:Class="TestApp.App">
+    <Application.Resources>
+        <Style TargetType="Label" x:Key="BigRedStyle">
+            <Setter Property="FontSize" Value="36" />
+            <Setter Property="TextColor" Value="Red" />
+        </Style>
+
+        <Style TargetType="Label" x:Key="BigDarkStyle">
+            <Setter Property="FontSize" Value="36" />
+            <Setter Property="TextColor" Value="White" />
+        </Style>
+
+
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Padding" Value="12" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="BackgroundColor" Value="BlueViolet" />
+        </Style>
+    </Application.Resources>
+</Application>
+

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
+
 namespace TubePlayer
 {
     public static class MauiProgram
@@ -9,10 +10,17 @@ namespace TubePlayer
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCompatibility()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("FiraSans-Light.ttf", "RegularFont");
                     fonts.AddFont("FiraSans-Medium.ttf", "MediumFont");
+                }).ConfigureMauiHandlers(handlers =>
+                {
+                    // Add legacy media element renderer
+                    handlers.AddCompatibilityRenderer(
+                        typeof(Xamarin.CommunityToolkit.UI.Views.MediaElement),
+                        typeof(Xamarin.CommunityToolkit.UI.Views.MediaElementRenderer));
                 });
 //              .ConfigureLifecycleEvents(events =>
 //                        {

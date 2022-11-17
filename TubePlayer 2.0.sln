@@ -5,7 +5,9 @@ VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maui.Apps.Framework", "Maui.Apps.Framework\Maui.Apps.Framework.csproj", "{E8A034F5-953C-4797-A98A-BE9357608F5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TubePlayer", "TubePlayer\TubePlayer.csproj", "{2BD554A9-8ABE-4BE6-8709-D7DB9C4C351E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TubePlayer", "TubePlayer\TubePlayer.csproj", "{2BD554A9-8ABE-4BE6-8709-D7DB9C4C351E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maui.Controls.BottomSheet", "Maui.Controls.BottomSheet\src\Maui.Controls.BottomSheet\Maui.Controls.BottomSheet.csproj", "{3BF0A01D-46AB-4EA6-9F2B-5080DFEA5DCA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,10 @@ Global
 		{2BD554A9-8ABE-4BE6-8709-D7DB9C4C351E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2BD554A9-8ABE-4BE6-8709-D7DB9C4C351E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2BD554A9-8ABE-4BE6-8709-D7DB9C4C351E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{3BF0A01D-46AB-4EA6-9F2B-5080DFEA5DCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BF0A01D-46AB-4EA6-9F2B-5080DFEA5DCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BF0A01D-46AB-4EA6-9F2B-5080DFEA5DCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BF0A01D-46AB-4EA6-9F2B-5080DFEA5DCA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

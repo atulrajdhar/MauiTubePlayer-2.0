@@ -20,3 +20,4 @@ global using System.Collections.ObjectModel;
 global using Maui.Apps.Framework.Exceptions;
 global using TubePlayer.Helpers;
 global using TubePlayer.Views.Base;
+global using Microsoft.Maui.Controls.Compatibility.Hosting;

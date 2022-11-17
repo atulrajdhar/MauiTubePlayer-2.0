@@ -37,7 +37,7 @@ public class YoutubeService : RestServiceBase, IApiService
 
     public async Task<CommentSearchResult> GetComments(string videoID)
     {
-        var resourceUri = $"commentThreads?part=snippet&maxResults=100&key={Constants.ApiKey}&id={videoID}";
+        var resourceUri = $"commentThreads?part=snippet&maxResults=100&key={Constants.ApiKey}&videoId={videoID}";
         
         var result = await GetAsync<CommentSearchResult>(resourceUri, 4); // Cache for 4 hours
         

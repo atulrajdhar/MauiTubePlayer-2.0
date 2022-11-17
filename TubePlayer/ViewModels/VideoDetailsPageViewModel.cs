@@ -1,4 +1,7 @@
-﻿namespace TubePlayer.ViewModels;
+﻿using YoutubeExplode;
+using YoutubeExplode.Videos.Streams;
+
+namespace TubePlayer.ViewModels;
 public partial class VideoDetailsPageViewModel : AppViewModelBase
 {
     [ObservableProperty]
@@ -14,6 +17,11 @@ public partial class VideoDetailsPageViewModel : AppViewModelBase
     private List<Comment> comments;
 
     public event EventHandler DownloadCompleted;
+
+    [ObservableProperty]
+    private string videoSource;
+
+    private IEnumerable<MuxedStreamInfo> streamInfo;
 
     public VideoDetailsPageViewModel(IApiService appApiService) : base(appApiService)
     {
@@ -52,6 +60,9 @@ public partial class VideoDetailsPageViewModel : AppViewModelBase
             var commentsSearchResult = await _appApiService.GetComments(videoID);
             Comments = commentsSearchResult.Items;
 
+            // Get stream URL
+            await GetVideoURL();
+
             // Raise data load completed event to the UI
             this.DataLoaded = true;
 
@@ -75,7 +86,7 @@ public partial class VideoDetailsPageViewModel : AppViewModelBase
         {
             SetDataLoadingIndicators(false);
         }
-    }
+    }    
 
     [RelayCommand]
     private async Task UnlikeVideo()
@@ -115,5 +126,21 @@ public partial class VideoDetailsPageViewModel : AppViewModelBase
     private async Task NavigateToVideoDetailsPage(string videoID)
     {
         await NavigationService.PushAsync(new VideoDetailsPage(videoID));
+    }
+
+    private async Task GetVideoURL()
+    {
+        var youtube = new YoutubeClient();
+
+        var streamManifest = await youtube.Videos.Streams.GetManifestAsync(
+            $"https://youtube.com/watch?v={TheVideo.Id}"
+        );
+
+        // Get highest quality muxed stream
+        streamInfo = streamManifest.GetMuxedStreams();
+
+        var videoPlayerStream = streamInfo.First(video => video.VideoQuality.Label is "240p" or "360p" or "480p");
+
+        VideoSource = videoPlayerStream.Url;
     }
 }
